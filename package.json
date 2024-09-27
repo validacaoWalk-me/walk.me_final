@@ -1,0 +1,40 @@
+{
+  "name": "walk.me",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "API para o projeto Walk.Me.",
+  "scripts": {
+    "clean": "rimraf src/**/*.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "tsx src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^22.4.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/geojson": "^7946.0.14",
+    "@types/multer": "^1.4.12",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "reflect-metadata": "^0.2.2",
+    "sequelize-typescript": "^2.1.6",
+    "tsx": "^4.17.0",
+    "walk.me": "file:"
+  }
+}
