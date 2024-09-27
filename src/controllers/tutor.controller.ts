@@ -12,13 +12,13 @@ dotenv.config();
 const secret = process.env.SECRET || ' ' ;
 
 // Definindo esquemas de validação com Zod
-const createTutorSchema = z.object({
+const createSchema = z.object({
     nome: z.string().min(1, "Nome é obrigatório"),
     email: z.string().email("Email inválido"),
     senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
 });
 
-const loginTutorSchema = z.object({
+const loginSchema = z.object({
     email: z.string().email("Email inválido"),
     senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
 });
@@ -44,7 +44,7 @@ class TutorController {
 
 	public async createTutor(req: Request, res: Response): Promise<void> {
 		// Validação do corpo da requisição
-		const parsed = createTutorSchema.safeParse(req.body);
+		const parsed = createSchema.safeParse(req.body);
 		if (!parsed.success) {
 			res.status(StatusCodes.BAD_REQUEST).json(parsed.error.format());
 			return;
@@ -73,7 +73,13 @@ class TutorController {
 	}
 
 	public async loginTutor(req:Request, res:Response): Promise<void>{
-		const {email, senha} = req.body;
+		// Validação do corpo da requisição
+		const parsed = loginSchema.safeParse(req.body);
+		if (!parsed.success) {
+			res.status(StatusCodes.BAD_REQUEST).json(parsed.error.format());
+			return;
+		}
+		const {email, senha} = parsed.data;
 		const user = await tutorService.getTutorByEmail(email);
 		if(!user){
 			res.status(StatusCodes.NOT_FOUND).json("Email não encontrado!")
